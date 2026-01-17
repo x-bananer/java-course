@@ -21,6 +21,12 @@ public class SumOfThreeNumbers {
 
         System.out.println("The sum of the numbers is " + (first + second + third));
         System.out.println("The product of the numbers is " + (first * second * third));
+
+        /*
+            The division operator / performs integer division if both operands are of type int.
+            Integer division discards the remainder.
+            To get the correct average value, we need to convert the variables to a floating-point type, e.g. double.
+        */
         System.out.println("The average of the numbers is " + ((double) (first + second + third) / 3));
     }
 }

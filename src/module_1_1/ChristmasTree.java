@@ -1,3 +1,4 @@
+package module_1_1;
 /*
 Write a program that prints the following:
            *
@@ -14,9 +15,9 @@ public class ChristmasTree {
         int start = counter / 2;
 
         for (int i = 1; i < counter; i++) {
-            boolean is_odd = i % 2 != 0;
+            boolean isOdd = i % 2 != 0;
 
-            if (is_odd) {
+            if (isOdd) {
                 String spaces = space.repeat(start), asterisks = asterisk.repeat(i);
                 System.out.println(spaces + asterisks);
                 start = start - 1;

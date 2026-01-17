@@ -1,3 +1,4 @@
+package module_1_1;
 /*
 Modify the program so that the program also prints the product and average of the three integers.
 Hint: try the modified program with integers 3, 4, and 6.

@@ -1,3 +1,4 @@
+package module_1_1;
 /*
 Modify the main method so that two cat objects are created, and the program behaves in the following way:
 

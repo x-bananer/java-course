@@ -25,8 +25,6 @@ public class GroceryListManager {
     }
 
     public static void addItem(String item, double cost, String category, int quantity) {
-        if (item == null || cost < 0 || quantity < 0) return;
-
         if (!groceryList.contains(item)) {
             groceryList.add(item);
         }
@@ -39,8 +37,8 @@ public class GroceryListManager {
     public static double calculateTotalCost() {
         double sum = 0.0;
         for (String item : prices.keySet()) {
-            int qty = quantities.getOrDefault(item, 1);
-            sum += prices.get(item) * qty;
+            int quantity = quantities.get(item);
+            sum += prices.get(item) * quantity;
         }
         return sum;
     }
@@ -55,7 +53,6 @@ public class GroceryListManager {
     }
 
     public static void updateQuantity(String item, int newQuantity) {
-        if (!quantities.containsKey(item) || newQuantity < 0) return;
         quantities.put(item, newQuantity);
     }
 

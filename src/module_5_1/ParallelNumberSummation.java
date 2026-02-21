@@ -3,13 +3,13 @@ package module_5_1;
 import java.util.Random;
 
 public class ParallelNumberSummation {
-    static class SumThread extends Thread {
+    static class SumJob implements Runnable {
         int[] numbers;
         int start;
         int end;
         long sum = 0;
 
-        SumThread(int[] numbers, int start, int end) {
+        SumJob(int[] numbers, int start, int end) {
             this.numbers = numbers;
             this.start = start;
             this.end = end;
@@ -32,30 +32,31 @@ public class ParallelNumberSummation {
             numbers[i] = randomNumsGenerator.nextInt(10);
         }
 
-        int numberOfThreads = Runtime.getRuntime().availableProcessors();
+        int cores = Runtime.getRuntime().availableProcessors();
 
-        SumThread[] threads = new SumThread[numberOfThreads];
+        Thread[] threads = new Thread[cores];
+        SumJob[] jobs = new SumJob[cores];
 
-        int numbersPerThread = count / numberOfThreads;
+        int numbersPerThread = count / cores;
 
-        for (int i = 0; i < numberOfThreads; i++) {
+        for (int i = 0; i < cores; i++) {
             int start = i * numbersPerThread;
             int end = start + numbersPerThread;
 
-            if (i == numberOfThreads - 1) {
+            if (i == cores - 1) {
                 end = count;
             }
 
-            threads[i] = new SumThread(numbers, start, end);
-
+            jobs[i] = new SumJob(numbers, start, end);
+            threads[i] = new Thread(jobs[i]);
             threads[i].start();
         }
 
         long total = 0;
 
-        for (int i = 0; i < numberOfThreads; i++) {
+        for (int i = 0; i < cores; i++) {
             threads[i].join();
-            total += threads[i].sum;
+            total += jobs[i].sum;
         }
 
         System.out.println("Sum: " + total);
